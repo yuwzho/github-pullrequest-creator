@@ -1,0 +1,18 @@
+{
+  "name": "pr-creator",
+  "version": "1.0.0",
+  "description": "create pull requset to git hub",
+  "main": "index.js",
+  "scripts": {
+    "install": "node setup.js",
+    "start": "node index.js"
+  },
+  "author": "yuwzho",
+  "license": "ISC",
+  "devDependencies": {
+    "bluebird": "^3.4.6",
+    "github": "^6.0.4",
+    "node-github": "0.0.3",
+    "sleep": "^4.0.0"
+  }
+}
