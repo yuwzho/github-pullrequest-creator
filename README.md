@@ -2,8 +2,8 @@
 Tiny scripts to create pullrequest for Github repo.
 
 ## Before run this script you need:
-* Your console can run `git` command
-* Your computer can run `node`, `npm` command
+* Your console can run `git` command ([Download Git](https://git-scm.com/downloads))
+* Your computer can run `node`, `npm` command ([Download nodejs](https://nodejs.org/en/download/))
 
 ## This script can:
 - [X] Sync the repo in local
