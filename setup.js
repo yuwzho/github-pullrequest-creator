@@ -17,7 +17,8 @@ function pr() {
   saveConfig(PR_CONFIG, {
     user: {
       name: '[Your GitHub username]',
-      token: '[Your GitHub token, REQUIRED if enable two facotr]'
+      token: '[Your GitHub token, REQUIRED if enable two facotr, IF no token, delete this line]',
+      password: '[If no token provided, enter your password here]'
     },
     repo: {
       owner: '[Your repo owner]',

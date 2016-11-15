@@ -46,13 +46,18 @@ function getRepoUrl(repo, user) {
   return 'https://' + user.name + ':' + (user.token || user.passwd) + '@github.com/' + repo.owner + '/' + repo.name;
 }
 
+function getFolderName(repo) {
+  return '.' + repo.name;
+}
+
 // clone the repo and direct to it.
 function chdirToRepo(repo, user) {
-  if (!fs.existsSync(repo.name)) {
+  var folder = getFolderName(repo);
+  if (!fs.existsSync(folder)) {
     // clone the repo, require user.name here
-    execSync('git clone ' + getRepoUrl(repo, user));
+    execSync('git clone ' + getRepoUrl(repo, user) + ' ' + folder);
   }
-  process.chdir(repo.name);
+  process.chdir(folder);
 }
 
 function pushChange(repo, branchName, user) {
