@@ -2,7 +2,7 @@
 Tiny scripts to create pullrequest for Github repo.
 
 ## Before run this script you need:
-* Your console can run `git` command ([Download Git](https://git-scm.com/downloads))
+* Your console can run `git` command ([Download git](https://git-scm.com/downloads))
 * Your computer can run `node`, `npm` command ([Download nodejs](https://nodejs.org/en/download/))
 
 ## This script can:
@@ -12,8 +12,8 @@ Tiny scripts to create pullrequest for Github repo.
 - [X] Commit the change and push the new branch to remote
 - [X] Send pullrequest according fork
 - [X] Create mutilple pullrequests
-- [ ] Wait a minute to send the next pullrequest
-- [X] Git ignore the config and content repo with credential information 
+- [X] Wait a minute to send the next pullrequest
+- [X] Git ignore the config and content repo with credential information
 
 ## How to run the script:
 1. clone this repo and install `npm packages`
@@ -21,11 +21,11 @@ Tiny scripts to create pullrequest for Github repo.
    ```cmd
    npm install
    ```
-2. Modify the pr-config.json
-    
+2. Modify the `pr-config.json`, which is created by `npm install`
+
    * `count` - How many pullrequest you want to create
    * `modifyCount` - How many files you want to edit in each pullrequest
-   * `period` - How long you want to wait between two pullrequests
+   * `period` - How long (millisecond) you want to wait between two pullrequests
 
    ```json
    {
@@ -51,7 +51,7 @@ Tiny scripts to create pullrequest for Github repo.
      },
      "count": 1,
      "modifyCount": 20,
-     "period": 5
+     "period": 5000
    }
    ```
 

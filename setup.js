@@ -37,7 +37,7 @@ function pr() {
     },
     count: 1,
     modifyCount: 20,
-    period: 5
+    period: 5000
   });
   return PR_CONFIG;
 }

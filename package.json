@@ -12,7 +12,6 @@
   "devDependencies": {
     "bluebird": "^3.4.6",
     "github": "^6.0.4",
-    "node-github": "0.0.3",
-    "sleep": "^4.0.0"
+    "node-github": "0.0.3"
   }
 }

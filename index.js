@@ -16,7 +16,7 @@ function GitHubCreator(user) {
       "user-agent": "nodejs" // GitHub require it
     },
     Promise: bluebird,
-    followRedirects: false, // default: true; 
+    followRedirects: false, // default: true;
     // there's currently an issue with non-get redirects, so allow ability to disable follow-redirects
     timeout: 5000
   });
@@ -32,8 +32,7 @@ function GitHubCreator(user) {
       username: user.name,
       password: user.passwd
     });
-  }
-  else {
+  } else {
     throw ('No authenticate!');
   }
   return github;
@@ -104,7 +103,7 @@ function modifyContent(modifyCount) {
     var item = files[Math.floor(Math.random() * files.length)];
     var filename = dir + '/' + item;
     // ignore .git
-    if(filename.startsWith('./.git')) {
+    if (filename.startsWith('./.git')) {
       return;
     }
     var state = fs.lstatSync(filename);
@@ -128,7 +127,7 @@ function modifyContent(modifyCount) {
     options = require(config);
   } catch (err) {
     console.error(err.message || err);
-    console.log('Run npm install to seup up your config');
+    console.log('Run `npm install` to seup up your config');
   }
   var github = GitHubCreator(options.user);
 
@@ -158,27 +157,41 @@ function modifyContent(modifyCount) {
     throw ('Missing pr option');
   }
 
+  var branches = [];
   // github, branchName, modifyCount, repo, title, base
   for (var i = 0; i < options.count; i++) {
     var branchName = branchNameGenerator(branch, i);
-    // switch branch
-    branchSwitch(base.branch, branchName);
-
-    // modify file
-    modifyContent(options.modifyCount);
-
-    // commit and push
-    pushChange(repo, branchName, user);
-
-    // creat pr
-    github.pullRequests.create({
-      user: base.owner,
-      repo: repo.name,
-      title: pr.title,
-      body: pr.body,
-      head: repo.owner + ':' + branchName,
-      base: base.branch,
-    });
-    sleep.sleep(options.period);
+    branches.push(branchName);
   }
+  var promise = bluebird.resolve();
+  branches.forEach((branchName) => {
+    promise = promise.delay(options.period).then(() => {
+      return new bluebird((resolve /*, reject*/ ) => {
+        // switch branch
+        branchSwitch(base.branch, branchName);
+
+        // modify file
+        modifyContent(options.modifyCount);
+
+        // commit and push
+        pushChange(repo, branchName, user);
+        // creat pr
+        github.pullRequests.create({
+          user: base.owner,
+          repo: repo.name,
+          title: pr.title,
+          body: pr.body,
+          head: repo.owner + ':' + branchName,
+          base: base.branch,
+        }, (err, res) => {
+          if (err) {
+            console.error(err);
+          } else {
+            console.log(res);
+          }
+          resolve();
+        });
+      });
+    });
+  });
 })('./pr-config.json');
