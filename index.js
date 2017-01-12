@@ -3,7 +3,6 @@ var execSync = require('child_process').execSync;
 var fs = require('fs');
 var githubApi = require('node-github');
 var path = require('path');
-var sleep = require('sleep');
 
 function GitHubCreator(user) {
   var github = new githubApi({
