@@ -51,6 +51,8 @@ Tiny scripts to create pullrequest for Github repo.
      },
      "count": 1,
      "modifyCount": 20,
+     "modifyDir": ".",
+     "modifyFilePattern": ".md",
      "period": 5000
    }
    ```

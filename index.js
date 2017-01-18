@@ -86,11 +86,11 @@ function branchSwitch(defaultBranch, branch) {
   }
 }
 
-function modifyContent(modifyCount) {
+function modifyContent(modifyCount, modifyDir, modifyFilePattern) {
   // modify file
   for (var i = 0; i < modifyCount; i++) {
     try {
-      var filename = getFileRandom('.');
+      var filename = getFileRandom(modifyDir);
       modifyRandom(filename);
     } catch (err) {
       console.error(err.message || err);
@@ -107,7 +107,11 @@ function modifyContent(modifyCount) {
     }
     var state = fs.lstatSync(filename);
     if (state.isFile()) { /* file */
-      return filename;
+        if (filename.indexOf(modifyFilePattern) >= 0) {
+            return filename;
+        } else {
+            return;
+        }
     } else if (state.isDirectory()) { /* dir */
       return getFileRandom(filename);
     }
@@ -170,7 +174,7 @@ function modifyContent(modifyCount) {
         branchSwitch(base.branch, branchName);
 
         // modify file
-        modifyContent(options.modifyCount);
+        modifyContent(options.modifyCount, options.modifyDir, options.modifyFilePattern);
 
         // commit and push
         pushChange(repo, branchName, user);
