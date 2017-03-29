@@ -37,6 +37,7 @@ function pr() {
     },
     count: 1,
     modifyCount: 20,
+    modifyDir: '.',
     modifyFilePattern: '.md',
     period: 5000
   });
