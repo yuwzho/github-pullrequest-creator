@@ -37,6 +37,7 @@ function pr() {
     },
     count: 1,
     modifyCount: 20,
+    modifyFilePattern: '.md',
     period: 5000
   });
   return PR_CONFIG;
